@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<div class="our-products">
+    <h1>{{section.settings.collection_name}}</h1>
+    <a href="{{section.settings.url}}">Shop All</a>
+    <div class="our-products-items" data-flickity='{"wrapAround" : true, "cellAlign" : "left", "imagesLoaded": true, "pageDots": false, "prevNextButtons": false }'>
+        {% for product in collections[section.settings.upsell_collection].products %}
+            <a href="{{product.url}}" style="display: flex; flex-direction: column; flex-wrap: wrap; text-decoration: none; align-items: center">
+              <img class="our-products-img" src="{{product.featured_image | img_url: '500x'}}"/>
+              <!-- <span style="max-width: 80%;">{{ product.title }}</span> -->
+            </a>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% schema %}
+{
+   "name": "Homepage Our Products",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "collection_name",
+        "label": "Collection Name"
+    },
+    {
+        "type": "collection",
+        "id": "upsell_collection",
+        "label": "Our Products Collection"
+    },
+    {
+        "type": "url",
+        "id": "url",
+        "label": "Our Products URL"
+    }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Our-Products"
+    }
+   ]
+}
+{% endschema %}
